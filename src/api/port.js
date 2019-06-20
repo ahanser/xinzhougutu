@@ -16,5 +16,7 @@ const url = {
   postformdata: `${tableApi}/api/sys/shipping/save`, //发送订单表格
   postshipid: `${tableApi}/api/sys/order/create/`, //发送商品id
   getorderList: `${tableApi}/api/sys/order/list`, //订单页面加载列表
+  getservedist: `${tableApi}/api/sys/open/service/category`, //服务管理页面获取资源目录
+  getdistresouce: `${tableApi}/api/sys/open/service/query_like`, //服务管理页面获取下方卡片信息资源
 }
 export default url;

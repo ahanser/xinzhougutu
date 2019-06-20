@@ -6,8 +6,9 @@
           <h1>服务资源</h1>
         </div>
         <div class="serveSearch">
-          <el-input placeholder="搜索数据"></el-input>
-          <el-button type="primary" icon="el-icon-search">搜索</el-button>
+          <el-input placeholder="搜索数据" v-model="searchthing" clearable>
+            <el-button type="primary" icon="el-icon-search" slot="append" @click="searchfor"></el-button>
+          </el-input>
         </div>
       </el-header>
       <el-main>
@@ -30,38 +31,41 @@
               <span v-if="scope.row.namech == '服务类型'">
                 <el-checkbox-group v-model="checkList">
                   <el-checkbox
-                    :label="item.namech+'('+(item.count)+')'"
+                    :label="item.selectCondition"
                     v-for="item in scope.row.children"
-                    :key="item.id"
-                    @change="checkname"
-                  ></el-checkbox>
+                    :key="item.selectCondition"
+                    @change="checkname()"
+                  >{{item.namech+'('+(item.count)+')'}}</el-checkbox>
                 </el-checkbox-group>
               </span>
               <span v-if="scope.row.namech == '主题分类'">
                 <el-checkbox-group v-model="checkList">
                   <el-checkbox
-                    :label="item.namech+'('+(item.count)+')'"
+                    :label="item.selectCondition"
                     v-for="item in scope.row.children"
-                    :key="item.id"
-                  ></el-checkbox>
+                    :key="item.selectCondition"
+                    @change="checkname()"
+                  >{{item.namech+'('+(item.count)+')'}}</el-checkbox>
                 </el-checkbox-group>
               </span>
               <span v-if="scope.row.namech == '覆盖区域'">
                 <el-checkbox-group v-model="checkList">
                   <el-checkbox
-                    :label="item.namech+'('+(item.count)+')'"
+                    :label="item.selectCondition"
                     v-for="item in scope.row.children"
-                    :key="item.id"
-                  ></el-checkbox>
+                    :key="item.selectCondition"
+                    @change="checkname()"
+                  >{{item.namech+'('+(item.count)+')'}}</el-checkbox>
                 </el-checkbox-group>
               </span>
               <span v-if="scope.row.namech == '坐标系'">
                 <el-checkbox-group v-model="checkList">
                   <el-checkbox
-                    :label="item.namech+'('+(item.count)+')'"
+                    :label="item.selectCondition"
                     v-for="item in scope.row.children"
-                    :key="item.id"
-                  ></el-checkbox>
+                    :key="item.selectCondition"
+                    @change="checkname()"
+                  >{{item.namech+'('+(item.count)+')'}}</el-checkbox>
                 </el-checkbox-group>
               </span>
             </template>
@@ -79,7 +83,7 @@
             <span>共{{total}}条</span>
           </div>
           <div class="totalright">
-            <el-select v-model="value" placeholder="请选择">
+            <el-select v-model="value" placeholder="请选择" @change="searchCriteria">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -110,8 +114,7 @@
               <div style="border-bottom:1px solid #ccc;padding-bottom:10px">
                 <el-tag v-for="tag in p.keyword.split('，')" :key="tag.name" type="info">{{tag}}</el-tag>
               </div>
-
-              <div class="bottom clearfix">
+              <div class="bottom clearfix" style="margin-top:20px">
                 <span>{{p.unit}}</span>
                 <time class="time">{{ p.createTime}}</time>
               </div>
@@ -133,24 +136,12 @@ export default {
     return {
       options: [
         {
-          value: '选项1',
-          label: '黄金糕'
+          value: '1',
+          label: '浏览次数'
         },
         {
-          value: '选项2',
-          label: '双皮奶'
-        },
-        {
-          value: '选项3',
-          label: '蚵仔煎'
-        },
-        {
-          value: '选项4',
-          label: '龙须面'
-        },
-        {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '2',
+          label: '服务名称'
         }
       ],
       value: '',
@@ -160,7 +151,6 @@ export default {
         { name: '标签三', type: 'info' },
         { name: '标签四', type: 'warning' }
       ],
-
       //显示查看获取所有数据
       result: [],
       ishow: false,
@@ -185,7 +175,7 @@ export default {
           name: '坐标系：'
         }
       ], //服务目录
-      checkList: ['选中且禁用', '复选框 A'], //服务类型
+      checkList: [], //服务类型
       searchTypeList: [],
       searchType: '',
       variableType: '', // 选择变量绑定
@@ -194,7 +184,8 @@ export default {
       total: 0, //共有多少条数据
       startpage: 1, //开始页码
       endpage: 10, //结束页码
-      distlist: [] //卡片视图数据
+      distlist: [], //卡片视图数据
+      searchthing: '' //模糊查询的数值
     }
   },
   components: {},
@@ -208,33 +199,94 @@ export default {
     //获取服务目录
     getservedist() {
       let that = this
-      this.$service
-        .post('http://192.168.5.61:9080/api/sys/open/service/category')
-        .then(function(res) {
-          // console.log(res.data.result)
-          that.tableData = res.data.result
-        })
+      this.$service.post(url.getservedist).then(function(res) {
+        console.log(res.data.result)
+        that.tableData = res.data.result
+      })
+      var scrollbarwrap = document.getElementsByClassName('el-scrollbar__wrap')
+      //console.log(scrollbarwrap)
+      for (var o = 0; o < scrollbarwrap.length; o++) {
+        scrollbarwrap[o].style.marginBottom = 0
+      }
     },
+    //获取卡片视图数据
     getdistresouce() {
       let that = this
+      this.$service.get(url.getdistresouce).then(function(res) {
+        //console.log(res.data.result.list)
+        var total = res.data.result
+        that.total = total.pageSize * total.size
+        that.startpage = (total.pageNum - 1) * total.pageSize + 1
+        that.endpage = total.pageSize * total.pageNum
+        that.distlist = total.list
+      })
+    },
+    //上方服务多选框勾选事件
+    checkname(obj) {
+      let that = this
+      var str = ''
+      this.checkList.forEach(item => {
+        str += '&' + item
+      })
+      str.substr(1)
+      if (this.searchthing != '') {
+        str = str + '&condition=' + this.searchthing
+        console.log(str)
+      }
+      this.$service.get(url.getdistresouce + '?' + str).then(function(res) {
+        var total = res.data.result
+        that.total = total.pageSize * total.size
+        that.startpage = (total.pageNum - 1) * total.pageSize + 1
+        that.endpage = total.pageSize * total.pageNum
+        that.distlist = total.list
+      })
+    },
+    //右侧下拉框事件
+    searchCriteria(e) {
+      let that = this
+      //console.log(e)
+      // console.log(url.getdistresouce + '?order=namech')
+
       this.$service
-        .get('http://192.168.5.61:9080/api/sys/open/service/query_like')
+        .get(
+          url.getdistresouce + (e == '1' ? '?order=pageView' : '?order=namech')
+        )
         .then(function(res) {
-          console.log(res.data.result)
+          //console.log(e)
+          //console.log('我被调用了')
+          //console.log(res)
           var total = res.data.result
           that.total = total.pageSize * total.size
           that.startpage = (total.pageNum - 1) * total.pageSize + 1
           that.endpage = total.pageSize * total.pageNum
           that.distlist = total.list
-
-          console.log(
-            "TCL: getdistresouce -> total.keyword.split(',')",
-            total.list[0].keyword.split('，')
-          )
         })
     },
-    checkname(obj) {
-      console.log(obj)
+    //右上角查询
+    searchfor() {
+      if (this.searchthing == '') {
+        this.$alert('请输入搜索内容', '', {
+          confirmButtonText: '确定'
+        })
+      } else {
+        let that = this
+        this.$service
+          .post(url.getservedist + '?condition=' + this.searchthing)
+          .then(function(res) {
+            console.log(res.data.result)
+            that.tableData = res.data.result
+          })
+        this.$service
+          .get(url.getdistresouce + '?condition=' + this.searchthing)
+          .then(function(res) {
+            //console.log(res.data.result.list)
+            var total = res.data.result
+            that.total = total.pageSize * total.size
+            that.startpage = (total.pageNum - 1) * total.pageSize + 1
+            that.endpage = total.pageSize * total.pageNum
+            that.distlist = total.list
+          })
+      }
     }
   }
 }
@@ -254,18 +306,18 @@ export default {
     }
     .serveSearch {
       float: right;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
+      // display: flex;
+      // justify-content: flex-start;
+      // align-items: center;
+      // flex-wrap: wrap;
       .el-input {
         width: 500px;
       }
-      .el-button {
-        margin-left: -3px;
-        margin-top: -3px;
-        height: 33px;
-      }
+      // .el-button {
+      //   margin-left: -3px;
+      //   margin-top: -3px;
+      //   height: 33px;
+      // }
     }
   }
   .moreclass {
@@ -276,8 +328,8 @@ export default {
   .totalline {
     height: 30px;
     line-height: 30px;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
     .totalleft {
       float: left;
     }
@@ -287,13 +339,16 @@ export default {
   }
   .card {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
     .el-card {
       width: 21%;
+      margin-left: 5.2%;
+      &:nth-of-type(1) {
+        margin-left: 0;
+      }
       .left {
         float: left;
       }

@@ -15,8 +15,8 @@ const user = {
     overTime: 600000000, // 设置登录超时时间,
     roleList: [], // 获取角色列表
     deptList: [], // 部门列表获取
-    meunList: [] // 菜单获取
-
+    meunList: [], // 菜单获取
+    picId: '', //服务明细对应id
   },
   mutations: {
     // 设置角色列表
@@ -34,7 +34,12 @@ const user = {
     // 设置用户名
     SET_NAME: (state, user) => {
       state.user = user
+    },
+    // 设置服务明细对应id
+    SET_PICID: (state, picId) => {
+      state.picId = picId
     }
+
   },
   actions: {
     // 获取用户名
@@ -166,7 +171,13 @@ const user = {
         })
 
       })
-    }
+    },
+    getPicid: ({
+      commit
+    }, value) => {
+      commit('SET_PICID', value)
+
+    },
   }
 
 }

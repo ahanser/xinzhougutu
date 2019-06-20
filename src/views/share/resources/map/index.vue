@@ -131,7 +131,7 @@
     </div>
     <!-- 地图工具条 -->
     <div id="mapTool">
-      <el-dropdown trigger="click">
+      <!-- <el-dropdown trigger="click">
         <span class="el-dropdown-link">
           定位工具
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -140,7 +140,10 @@
           <el-dropdown-item icon="el-icon-plus">工具一</el-dropdown-item>
           <el-dropdown-item icon="el-icon-circle-plus">工具二</el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown>
+      </el-dropdown>-->
+      <el-input placeholder="搜索数据" clearable style="width:150px">
+        <el-button type="primary" icon="el-icon-search" slot="append"></el-button>
+      </el-input>
       <em class="lineBar"></em>
       <el-dropdown trigger="click">
         <span class="el-dropdown-link">
