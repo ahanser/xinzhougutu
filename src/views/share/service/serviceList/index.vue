@@ -96,18 +96,17 @@
         <!-- 卡片视图 -->
         <div class="card">
           <el-card :body-style="{ padding: '0px' }" v-for="(p,index) in distlist" :key="index">
-            <router-link to="/service/serviceList">
-              <img
-                src="http://192.168.5.88:9080/api/inputCatalogPic/140981/20430/browse.png"
-                class="image"
-                @click="serviceDetails(p.id)"
-              >
-            </router-link>
+            <img
+              src="http://192.168.5.88:9080/api/inputCatalogPic/140981/20430/browse.png"
+              class="image"
+              @click="serviceDetails(p.id)"
+            >
+
             <div style="padding: 37px 10px 10px;">
               <span style="font-size:20px;font-weight:400">{{p.unit}}</span>
               <div style="height:20px;margin-top:10px;margin-bottom:10px">
                 <div class="left">
-                  <span style="color:#D3D6DB">{{p.unit}}</span>
+                  <span style="color:#D3D6DB;z-index:10000000">{{p.unit}}</span>
                 </div>
                 <div class="right">
                   <i class="el-icon-view"></i>
@@ -293,10 +292,9 @@ export default {
     },
 
     //卡片视图跳转
-
     serviceDetails(id) {
       console.log('点击')
-      this.$router.push({ path: '/service/serviceList' })
+      this.$router.push({ path: '/service/serviceDetails' })
       this.$store.dispatch('getPicid', id)
       console.log(this.$store.state.user.picId)
     }

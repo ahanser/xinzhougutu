@@ -88,7 +88,7 @@ service.interceptors.request.use(
     // if (store.getters.token) {
     //   config.headers['X-Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     // }
-    //config.headers['Authorization'] = 'bearerVym15bJDEVvj6EM3AONlzQtrSKmBZmMihgmKTzk6O7A='
+    config.headers['Authorization'] = 'bearerYffVhxtITB+GRArtO93G0p7SGL4sR78d6BFT7s2rUcA='
     // config.headers['Username'] = 'app'
     // config.headers['Password'] = 'app'
     // config.headers['Password'] = 'app' // 让每个请求携带自定义token 请根据实际情况自行修改
