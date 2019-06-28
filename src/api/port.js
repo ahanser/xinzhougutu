@@ -9,6 +9,12 @@ const url = {
   getarea: `${areaApi}/api/inputCatalogData/searchDistinctXZQHMC`,
   getMapResult: `${areaApi}/api/inputCatalogData/searchAllFileByDataId?`, //底图图层成果表格
   searchResult: `${areaApi}/api/inputCatalogData/detailedInquiry?catalogName=`, //顶部搜索框
+  //系统设置
+  getsettree: `${areaApi}/api/cglayer/findAll`, //获取成果展示页面左侧树形结构数据
+  addsetfrom: `${areaApi}/api/cglayer/insertLayer`, //成果展示添加节点数据
+  deletesetfrom: `${areaApi}/api/cglayer/deleteLayer?id=`, //成果展示删除节点数据
+  updatesetfrom: `${areaApi}/api/cglayer/updateCGLayer`, //成果展示更新节点数据
+
   deleteTable: `${tableApi}/api/sys/cart/delete/`, //删除成果车表格数据
   addresult: `${tableApi}/api/sys/cart/add/`, //加入成果车
   getsettlelist: `${tableApi}/api/sys/order/get_order_cart_product`, //获取结算页面

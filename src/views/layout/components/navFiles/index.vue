@@ -53,10 +53,10 @@ export default {
         },
         {
           path: '/service/serviceList',
-          name: '服务管理'
+          name: '服务查询'
         },
         {
-          path: '/',
+          path: '/set/systemSetting',
           name: '系统设置'
         }
       ]

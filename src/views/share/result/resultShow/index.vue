@@ -135,7 +135,7 @@ export default {
       mapObject: {
         map: '', //实例对象
         ZOOM: '8',
-        CENTER: [108, 34],
+        CENTER: [108, 34], //底层中心
         housingLayer: '', //底层地图
         Ext: '', //可视范围
         mapview: '', //视图容器

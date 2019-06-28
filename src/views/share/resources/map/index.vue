@@ -147,13 +147,9 @@
       <em class="lineBar"></em>
       <el-dropdown trigger="click">
         <span class="el-dropdown-link">
-          范围查询
+          空间查询
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item icon="el-icon-plus">工具一</el-dropdown-item>
-          <el-dropdown-item icon="el-icon-circle-plus">工具二</el-dropdown-item>
-        </el-dropdown-menu>
       </el-dropdown>
       <em class="lineBar"></em>
       <el-dropdown trigger="click">
@@ -442,70 +438,7 @@
               </div>
             </div>
           </el-card>
-          <!-- <el-card style="margin-bottom:30px">
-            <header style class="productHeader">
-              产品类别：
-              <span>矢量地图数据</span>
-            </header>
-            <div class="cardContent">
-              <div class="leftContent">
-                <div class="top">
-                  <img
-                    src="http://192.168.5.88:9080/api/inputCatalogPic/140981/20430/browse.png"
-                    alt
-                  >
-                  <div class="text">
-                    <p>
-                      新图号：
-                      <span>111</span>
-                    </p>
-                    <p>
-                      新图号：
-                      <span>111</span>
-                    </p>
-                    <p>
-                      新图号：
-                      <span>111</span>
-                    </p>
-                  </div>
-                </div>
-                <div class="top" style="border-bottom:none">
-                  <img
-                    src="http://192.168.5.88:9080/api/inputCatalogPic/140981/20430/browse.png"
-                    alt
-                  >
-                  <div class="text">
-                    <p>
-                      新图号：
-                      <span>111</span>
-                    </p>
-                    <p>
-                      新图号：
-                      <span>111</span>
-                    </p>
-                    <p>
-                      新图号：
-                      <span>111</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="rightContent">
-                <h3>服务推荐</h3>
-                <div style="margin-bottom:30px">
-                  <p>增值电信业务经营许可证：浙B2-20080224</p>
-                  <p>网络文化经营许可证：浙网文[2016]0268-0</p>
-                  <p>增值电信业务经营许可证：浙B2-20080224</p>
-                </div>
-                <div style="margin-bottom:30px">
-                  <p>增值电信业务经营许可证：浙B2-20080224</p>
-                  <p>网络文化经营许可证：浙网文[2016]0268-0</p>
-                  <p>增值电信业务经营许可证：浙B2-20080224</p>
-                </div>
-                <el-button type="primary" plain>点击展开</el-button>
-              </div>
-            </div>
-          </el-card>-->
+
           <div style="border-top: 1px solid #eee;height:50px;line-height:50px" class="datafrom">
             数据来源：
             <span>第三次国土调查统一时点数据</span>

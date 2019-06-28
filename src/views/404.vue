@@ -1,41 +1,48 @@
 <template>
   <div>
-    {{checkedCities1}}
-    <el-checkbox-group v-model="checkedCities1">
-      <el-checkbox v-for="city in cities" :label="city.value" :key="city.id" @change="demo"></el-checkbox>
-    </el-checkbox-group>
+    <treeselect v-model="value" :multiple="true" :options="options"/>
   </div>
 </template>
+
 <script>
+// import the component
+import Treeselect from '@riophae/vue-treeselect'
+// import the styles
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+
 export default {
+  // register the component
+  components: { Treeselect },
   data() {
     return {
-      checkedCities1: [],
-      cities: [
+      // define default value
+      value: null,
+      // define options
+      options: [
         {
-          value: '上海',
-          id: 1
+          id: 'a',
+          label: 'a',
+          children: [
+            {
+              id: 'aa',
+              label: 'aa'
+            },
+            {
+              id: 'ab',
+              label: 'ab'
+            }
+          ]
         },
         {
-          value: '北京',
-          id: 2
+          id: 'b',
+          label: 'b'
         },
         {
-          value: '广州',
-          id: 3
-        },
-        {
-          value: '深圳',
-          id: 4
+          id: 'c',
+          label: 'c'
         }
       ]
-    }
-  },
-  methods: {
-    demo() {
-      console.log(this.checkedCities1)
     }
   }
 }
 </script>
-

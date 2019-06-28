@@ -1,53 +1,117 @@
 
 <template>
   <div class="side-nav" :class="layout">
-    <el-menu ref="navbar" :default-active="defActive" menu-trigger="click" @select="handleSelect" background-color="#545c64" active-text-color="#ffd04b" text-color="#fff">
-      <nav-bar-item v-for="(item, n) in arr" :item="item" :navIndex="String(n)" :key="n"></nav-bar-item>
+    <el-menu
+      ref="navbar"
+      router
+      :default-active="defActive"
+      menu-trigger="click"
+      background-color="#545c64"
+      active-text-color="#ffd04b"
+      text-color="#fff"
+    >
+      <nav-bar-item v-for="(item, n) in arr1" :item="item" :navIndex="String(n)" :key="n"></nav-bar-item>
     </el-menu>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-
 import NavBarItem from './SidebarItem'
 
 export default {
   data() {
     return {
-      navBgShow: false
-
-      // arr: [{
-
-      //         path: '/ss',
-
-      //         name: '系统管理',
-      //         icon: 'el-icon-setting',
-      //         child:[
-      //             {
-      //              path: '/example1/role',
-      //              name: '角色管理',
-
-      //            },
-      //             {
-      //              path: '/example1/user',
-      //              name: '用户管理',
-      //              },
-      //              {
-      //              path: '/example1/menu',
-      //              name: '权限管理',
-      //              },
-      //              {
-      //              path: '/example1/order',
-      //              name: '菜单管理',
-      //              },
-      //               {
-      //              path: '/example1/dept',
-      //              name: '部门管理',
-      //              }
-      //         ]
-      //     },
-      // ]
+      navBgShow: false,
+      arr1: [
+        {
+          path: '/set',
+          name: '首页管理',
+          icon: 'el-icon-s-home',
+          child: [
+            {
+              path: '/example1/role',
+              name: '角色管理'
+            },
+            {
+              path: '/example1/user',
+              name: '用户管理'
+            }
+          ]
+        },
+        {
+          path: '/set',
+          name: '资源目录管理',
+          icon: 'el-icon-s-unfold',
+          child: [
+            {
+              path: '/set/systemSetting',
+              name: '目录管理'
+            },
+            {
+              path: '/example1/order',
+              name: '元数据管理'
+            },
+            {
+              path: '/example1/dept',
+              name: '数据审批管理'
+            }
+          ]
+        },
+        {
+          path: '/set',
+          name: '成果展示管理',
+          icon: 'el-icon-copy-document',
+          child: [
+            {
+              path: '/set/systemResult',
+              name: '目录管理'
+            },
+            {
+              path: '/example1/order',
+              name: '元数据管理'
+            },
+            {
+              path: '/example1/dept',
+              name: '数据审批管理'
+            }
+          ]
+        },
+        {
+          path: '/set',
+          name: '服务资源管理',
+          icon: 'el-icon-menu',
+          child: [
+            {
+              path: '/set/serveBaseInfo',
+              name: '服务注册管理'
+            },
+            {
+              path: '/set/serverShowInfo',
+              name: '服务管理信息'
+            }
+          ]
+        },
+        {
+          path: '/set',
+          name: '系统管理',
+          icon: 'el-icon-setting',
+          child: [
+            {
+              path: '/example1/menu',
+              name: '目录管理'
+            },
+            {
+              path: '/example1/order',
+              name: '元数据管理'
+            },
+            {
+              path: '/example1/dept',
+              name: '数据审批管理'
+            }
+          ]
+        }
+      ]
     }
   },
 
